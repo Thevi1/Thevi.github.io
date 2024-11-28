@@ -1,0 +1,53 @@
+[module]
+[[module.imports]]
+  path = 'github.com/LordMathis/hugo-theme-nightfall'
+
+baseURL = 'https://gohugo.io/'
+theme = "nightfall" 
+
+[menu]
+  [[menu.header]]
+    name = "posts"
+    weight = 0
+    url = "/posts"
+  [[menu.header]]
+    name = "about"
+    weight = 1
+    url = "/about"
+
+[params]
+user = "hello"
+hostname = "me.io"
+  [params.author]
+    name = "Steven  Geovino"  # Website and RSS feed author
+    email = "email@example.com"  # RSS feed email address
+
+
+readingTime = true  # Show reading time on post page
+published = true  # Show published data on post page
+
+
+[[params.social]]
+key = 0
+name = "github"
+url = "https://github.com/Thevi1"
+target = "_blank"
+aria = "GitHub Profile"
+
+[[params.social]]
+key = 1
+name = "Facebook"
+url = "https://www.facebook.com/steven.geovino.5"
+aria = "Facebook Profile"
+
+[[params.social]]
+key = 2
+name = "linkedin"
+url = "https://www.linkedin.com/in/steven-geovino-b5aba1210/"
+aria = "LinkedIn Profile"
+
+[[params.social]]
+key = 3
+name = "email"
+url = "mailto:matatatenggo@gmail.com"
+aria = "My e-Mail Address"
