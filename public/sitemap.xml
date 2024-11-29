@@ -5,6 +5,9 @@
     <loc>//localhost:1313/</loc>
     <lastmod>2024-11-28T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>//localhost:1313/about/</loc>
+    <lastmod>2024-11-28T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>//localhost:1313/tags/index/</loc>
     <lastmod>2024-11-28T00:00:00+00:00</lastmod>
   </url><url>
@@ -15,6 +18,9 @@
     <lastmod>2024-11-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>//localhost:1313/tags/</loc>
+    <lastmod>2024-11-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/posts/vxlan/</loc>
     <lastmod>2024-11-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>//localhost:1313/categories/</loc>
@@ -61,14 +67,5 @@
   </url><url>
     <loc>//localhost:1313/posts/emoji-support/</loc>
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/about/</loc>
-    <lastmod>2019-02-28T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/archetypes/default/</loc>
-  </url><url>
-    <loc>//localhost:1313/posts/vxlan/</loc>
-  </url><url>
-    <loc>//localhost:1313/archetypes/</loc>
   </url>
 </urlset>

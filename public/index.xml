@@ -11,6 +11,13 @@
     <lastBuildDate>Thu, 28 Nov 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>About</title>
+      <link>//localhost:1313/about/</link>
+      <pubDate>Thu, 28 Nov 2024 00:00:00 +0000</pubDate><author>email@example.com (Steven  Geovino)</author>
+      <guid>//localhost:1313/about/</guid>
+      <description>&lt;h1 id=&#34;a-day-in-the-life-of-a-network-engineer&#34;&gt;A Day in the Life of a Network Engineer&lt;/h1&gt;&#xA;&lt;p&gt;As a &lt;strong&gt;Network Engineer&lt;/strong&gt;, my days are filled with solving complex problems, optimizing network performance, and ensuring seamless communication between systems. In this post, I&amp;rsquo;ll walk you through some of the key aspects of my work, share insights on the tools I use, and discuss the challenges I face in the dynamic world of networking.&lt;/p&gt;&#xA;&lt;h2 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#what-does-a-network-engineer-do&#34;&gt;What Does a Network Engineer Do?&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#key-tools-and-technologies&#34;&gt;Key Tools and Technologies&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#common-challenges-in-network-engineering&#34;&gt;Common Challenges in Network Engineering&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#best-practices-for-network-performance&#34;&gt;Best Practices for Network Performance&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#future-of-networking&#34;&gt;Future of Networking&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#conclusion&#34;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;what-does-a-network-engineer-do&#34;&gt;What Does a Network Engineer Do?&lt;/h2&gt;&#xA;&lt;p&gt;A &lt;strong&gt;Network Engineer&lt;/strong&gt; designs, implements, and maintains the systems that allow for data transmission between devices. This role requires an in-depth understanding of network hardware (routers, switches, firewalls) and software protocols (IP, TCP/IP, DNS).&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>Route Server</title>
       <link>//localhost:1313/posts/route-server/</link>
       <pubDate>Thu, 28 Nov 2024 00:00:00 +0000</pubDate><author>email@example.com (Steven  Geovino)</author>
@@ -58,20 +65,6 @@
       <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate><author>email@example.com (Steven  Geovino)</author>
       <guid>//localhost:1313/posts/emoji-support/</guid>
       <description>&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>About</title>
-      <link>//localhost:1313/about/</link>
-      <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate><author>email@example.com (Steven  Geovino)</author>
-      <guid>//localhost:1313/about/</guid>
-      <description>&lt;p&gt;Written in Go, Hugo is an open source static site generator available under the &lt;a href=&#34;https://github.com/gohugoio/hugo/blob/master/LICENSE&#34;&gt;Apache Licence 2.0.&lt;/a&gt; Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.&lt;/p&gt;&#xA;&lt;p&gt;Hugo makes use of a variety of open source projects including:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/yuin/goldmark&#34;&gt;https://github.com/yuin/goldmark&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/alecthomas/chroma&#34;&gt;https://github.com/alecthomas/chroma&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/muesli/smartcrop&#34;&gt;https://github.com/muesli/smartcrop&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/spf13/cobra&#34;&gt;https://github.com/spf13/cobra&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/spf13/viper&#34;&gt;https://github.com/spf13/viper&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Hugo is ideal for blogs, corporate websites, creative portfolios, online magazines, single page applications or even a website with thousands of pages.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title></title>
-      <link>//localhost:1313/archetypes/default/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>email@example.com (Steven  Geovino)</author>
-      <guid>//localhost:1313/archetypes/default/</guid>
-      <description></description>
     </item>
   </channel>
 </rss>
