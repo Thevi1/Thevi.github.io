@@ -52,6 +52,3 @@ name = "email"
 url = "mailto:matatatenggo@gmail.com"
 aria = "My e-Mail Address"
 
-
-[params.meta]
- favicon = true
