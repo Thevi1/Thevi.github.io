@@ -1,18 +1,16 @@
 +++
 author = "Hugo Authors"
 title = "Route Server"
-date = "2019-03-11"
+date = "2024-11-28"
 description = "Lab to undestand how route server work"
 series = ["Themes Guide"]
 aliases = ["migrate-from-jekyl"]
 +++
 
-
-Here is the topologi the lab route server
+Here is topologi lab route server
 <!--more-->
 
-![Local Image](<img src="../../images/topologi.png" style="width:100px;heigh:100px;">)
-
+![Topologi](https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/topologi.png)
  
 ## Headings
 
