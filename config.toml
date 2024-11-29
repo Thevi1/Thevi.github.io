@@ -2,7 +2,7 @@
 [[module.imports]]
   path = 'github.com/LordMathis/hugo-theme-nightfall'
 
-baseURL = 'https://gohugo.io/'
+baseURL = 'https://thevi.web.id'
 theme = "nightfall" 
 
 [menu]
