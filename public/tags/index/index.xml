@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Index on </title>
-    <link>/tags/index/</link>
+    <link>//localhost:1313/tags/index/</link>
     <description>Recent content in Index on </description>
     <generator>Hugo</generator>
     <language>en</language>
     <managingEditor>matatatenggo@gmail.com (Steven  Geovino)</managingEditor>
     <webMaster>matatatenggo@gmail.com (Steven  Geovino)</webMaster>
     <lastBuildDate>Thu, 28 Nov 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/index/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/tags/index/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Posts</title>
-      <link>/posts/</link>
+      <link>//localhost:1313/posts/</link>
       <pubDate>Thu, 28 Nov 2024 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/posts/</guid>
+      <guid>//localhost:1313/posts/</guid>
       <description></description>
     </item>
   </channel>

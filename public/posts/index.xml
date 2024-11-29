@@ -2,61 +2,61 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on </title>
-    <link>/posts/</link>
+    <link>//localhost:1313/posts/</link>
     <description>Recent content in Posts on </description>
     <generator>Hugo</generator>
     <language>en</language>
     <managingEditor>matatatenggo@gmail.com (Steven  Geovino)</managingEditor>
     <webMaster>matatatenggo@gmail.com (Steven  Geovino)</webMaster>
     <lastBuildDate>Thu, 28 Nov 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Mikrotik Tips</title>
-      <link>/posts/mikrotik/</link>
+      <link>//localhost:1313/posts/mikrotik/</link>
       <pubDate>Thu, 28 Nov 2024 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/posts/mikrotik/</guid>
+      <guid>//localhost:1313/posts/mikrotik/</guid>
       <description>&lt;h4 id=&#34;comming-soon&#34;&gt;Comming soon&lt;/h4&gt;</description>
     </item>
     <item>
       <title>Route Server</title>
-      <link>/posts/route-server/</link>
+      <link>//localhost:1313/posts/route-server/</link>
       <pubDate>Thu, 28 Nov 2024 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/posts/route-server/</guid>
+      <guid>//localhost:1313/posts/route-server/</guid>
       <description>&lt;p&gt;This Blog is for documenting my lab about route server using &lt;a href=&#34;https://www.ixpmanager.org/&#34;&gt;open IXP Manager&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Markdown Syntax Guide</title>
-      <link>/posts/markdown-syntax/</link>
+      <link>//localhost:1313/posts/markdown-syntax/</link>
       <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/posts/markdown-syntax/</guid>
+      <guid>//localhost:1313/posts/markdown-syntax/</guid>
       <description>&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Rich Content</title>
-      <link>/posts/rich-content/</link>
+      <link>//localhost:1313/posts/rich-content/</link>
       <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/posts/rich-content/</guid>
+      <guid>//localhost:1313/posts/rich-content/</guid>
       <description>&lt;p&gt;Hugo ships with several &lt;a href=&#34;https://gohugo.io/content-management/shortcodes/#use-hugos-built-in-shortcodes&#34;&gt;Built-in Shortcodes&lt;/a&gt; for rich content, along with a &lt;a href=&#34;https://gohugo.io/about/hugo-and-gdpr/&#34;&gt;Privacy Config&lt;/a&gt; and a set of Simple Shortcodes that enable static and no-JS versions of various social media embeds.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Placeholder Text</title>
-      <link>/posts/placeholder-text/</link>
+      <link>//localhost:1313/posts/placeholder-text/</link>
       <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/posts/placeholder-text/</guid>
+      <guid>//localhost:1313/posts/placeholder-text/</guid>
       <description>&lt;p&gt;Lorem est tota propiore conpellat pectoribus de pectora summo.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Math Typesetting</title>
-      <link>/posts/math-typesetting/</link>
+      <link>//localhost:1313/posts/math-typesetting/</link>
       <pubDate>Fri, 08 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/posts/math-typesetting/</guid>
+      <guid>//localhost:1313/posts/math-typesetting/</guid>
       <description>&lt;p&gt;Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Emoji Support</title>
-      <link>/posts/emoji-support/</link>
+      <link>//localhost:1313/posts/emoji-support/</link>
       <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/posts/emoji-support/</guid>
+      <guid>//localhost:1313/posts/emoji-support/</guid>
       <description>&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;</description>
     </item>
   </channel>

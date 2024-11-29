@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Networking on </title>
-    <link>/tags/networking/</link>
+    <link>//localhost:1313/tags/networking/</link>
     <description>Recent content in Networking on </description>
     <generator>Hugo</generator>
     <language>en</language>
     <managingEditor>matatatenggo@gmail.com (Steven  Geovino)</managingEditor>
     <webMaster>matatatenggo@gmail.com (Steven  Geovino)</webMaster>
     <lastBuildDate>Thu, 28 Nov 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/networking/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/tags/networking/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Mikrotik Tips</title>
-      <link>/posts/mikrotik/</link>
+      <link>//localhost:1313/posts/mikrotik/</link>
       <pubDate>Thu, 28 Nov 2024 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/posts/mikrotik/</guid>
+      <guid>//localhost:1313/posts/mikrotik/</guid>
       <description>&lt;h4 id=&#34;comming-soon&#34;&gt;Comming soon&lt;/h4&gt;</description>
     </item>
     <item>
       <title>Route Server</title>
-      <link>/posts/route-server/</link>
+      <link>//localhost:1313/posts/route-server/</link>
       <pubDate>Thu, 28 Nov 2024 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/posts/route-server/</guid>
+      <guid>//localhost:1313/posts/route-server/</guid>
       <description>&lt;p&gt;This Blog is for documenting my lab about route server using &lt;a href=&#34;https://www.ixpmanager.org/&#34;&gt;open IXP Manager&lt;/a&gt;&lt;/p&gt;</description>
     </item>
   </channel>

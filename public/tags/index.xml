@@ -2,75 +2,75 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on </title>
-    <link>/tags/</link>
+    <link>//localhost:1313/tags/</link>
     <description>Recent content in Tags on </description>
     <generator>Hugo</generator>
     <language>en</language>
     <managingEditor>matatatenggo@gmail.com (Steven  Geovino)</managingEditor>
     <webMaster>matatatenggo@gmail.com (Steven  Geovino)</webMaster>
     <lastBuildDate>Thu, 28 Nov 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Index</title>
-      <link>/tags/index/</link>
+      <link>//localhost:1313/tags/index/</link>
       <pubDate>Thu, 28 Nov 2024 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/tags/index/</guid>
+      <guid>//localhost:1313/tags/index/</guid>
       <description></description>
     </item>
     <item>
       <title>Networking</title>
-      <link>/tags/networking/</link>
+      <link>//localhost:1313/tags/networking/</link>
       <pubDate>Thu, 28 Nov 2024 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/tags/networking/</guid>
+      <guid>//localhost:1313/tags/networking/</guid>
       <description></description>
     </item>
     <item>
       <title>Css</title>
-      <link>/tags/css/</link>
+      <link>//localhost:1313/tags/css/</link>
       <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/tags/css/</guid>
+      <guid>//localhost:1313/tags/css/</guid>
       <description></description>
     </item>
     <item>
       <title>Html</title>
-      <link>/tags/html/</link>
+      <link>//localhost:1313/tags/html/</link>
       <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/tags/html/</guid>
+      <guid>//localhost:1313/tags/html/</guid>
       <description></description>
     </item>
     <item>
       <title>Markdown</title>
-      <link>/tags/markdown/</link>
+      <link>//localhost:1313/tags/markdown/</link>
       <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/tags/markdown/</guid>
+      <guid>//localhost:1313/tags/markdown/</guid>
       <description></description>
     </item>
     <item>
       <title>Privacy</title>
-      <link>/tags/privacy/</link>
+      <link>//localhost:1313/tags/privacy/</link>
       <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/tags/privacy/</guid>
+      <guid>//localhost:1313/tags/privacy/</guid>
       <description></description>
     </item>
     <item>
       <title>Shortcodes</title>
-      <link>/tags/shortcodes/</link>
+      <link>//localhost:1313/tags/shortcodes/</link>
       <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/tags/shortcodes/</guid>
+      <guid>//localhost:1313/tags/shortcodes/</guid>
       <description></description>
     </item>
     <item>
       <title>Text</title>
-      <link>/tags/text/</link>
+      <link>//localhost:1313/tags/text/</link>
       <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/tags/text/</guid>
+      <guid>//localhost:1313/tags/text/</guid>
       <description></description>
     </item>
     <item>
       <title>Emoji</title>
-      <link>/tags/emoji/</link>
+      <link>//localhost:1313/tags/emoji/</link>
       <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/tags/emoji/</guid>
+      <guid>//localhost:1313/tags/emoji/</guid>
       <description></description>
     </item>
   </channel>

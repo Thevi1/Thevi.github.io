@@ -2,68 +2,68 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title></title>
-    <link>/</link>
+    <link>//localhost:1313/</link>
     <description>Recent content on </description>
     <generator>Hugo</generator>
     <language>en</language>
     <managingEditor>matatatenggo@gmail.com (Steven  Geovino)</managingEditor>
     <webMaster>matatatenggo@gmail.com (Steven  Geovino)</webMaster>
     <lastBuildDate>Thu, 28 Nov 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
-      <link>/about/</link>
+      <link>//localhost:1313/about/</link>
       <pubDate>Thu, 28 Nov 2024 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/about/</guid>
+      <guid>//localhost:1313/about/</guid>
       <description>&lt;h1 id=&#34;a-day-in-the-life-of-a-network-engineer&#34;&gt;A Day in the Life of a Network Engineer&lt;/h1&gt;&#xA;&lt;p&gt;As a &lt;strong&gt;Network Engineer&lt;/strong&gt;, my days are filled with solving complex problems, optimizing network performance, and ensuring seamless communication between systems. In this post, I&amp;rsquo;ll walk you through some of the key aspects of my work, share insights on the tools I use, and discuss the challenges I face in the dynamic world of networking.&lt;/p&gt;&#xA;&lt;h2 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#what-does-a-network-engineer-do&#34;&gt;What Does a Network Engineer Do?&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#key-tools-and-technologies&#34;&gt;Key Tools and Technologies&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#common-challenges-in-network-engineering&#34;&gt;Common Challenges in Network Engineering&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#best-practices-for-network-performance&#34;&gt;Best Practices for Network Performance&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#future-of-networking&#34;&gt;Future of Networking&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#conclusion&#34;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;what-does-a-network-engineer-do&#34;&gt;What Does a Network Engineer Do?&lt;/h2&gt;&#xA;&lt;p&gt;A &lt;strong&gt;Network Engineer&lt;/strong&gt; designs, implements, and maintains the systems that allow for data transmission between devices. This role requires an in-depth understanding of network hardware (routers, switches, firewalls) and software protocols (IP, TCP/IP, DNS).&lt;/p&gt;</description>
     </item>
     <item>
       <title>Mikrotik Tips</title>
-      <link>/posts/mikrotik/</link>
+      <link>//localhost:1313/posts/mikrotik/</link>
       <pubDate>Thu, 28 Nov 2024 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/posts/mikrotik/</guid>
+      <guid>//localhost:1313/posts/mikrotik/</guid>
       <description>&lt;h4 id=&#34;comming-soon&#34;&gt;Comming soon&lt;/h4&gt;</description>
     </item>
     <item>
       <title>Route Server</title>
-      <link>/posts/route-server/</link>
+      <link>//localhost:1313/posts/route-server/</link>
       <pubDate>Thu, 28 Nov 2024 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/posts/route-server/</guid>
+      <guid>//localhost:1313/posts/route-server/</guid>
       <description>&lt;p&gt;This Blog is for documenting my lab about route server using &lt;a href=&#34;https://www.ixpmanager.org/&#34;&gt;open IXP Manager&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Markdown Syntax Guide</title>
-      <link>/posts/markdown-syntax/</link>
+      <link>//localhost:1313/posts/markdown-syntax/</link>
       <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/posts/markdown-syntax/</guid>
+      <guid>//localhost:1313/posts/markdown-syntax/</guid>
       <description>&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Rich Content</title>
-      <link>/posts/rich-content/</link>
+      <link>//localhost:1313/posts/rich-content/</link>
       <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/posts/rich-content/</guid>
+      <guid>//localhost:1313/posts/rich-content/</guid>
       <description>&lt;p&gt;Hugo ships with several &lt;a href=&#34;https://gohugo.io/content-management/shortcodes/#use-hugos-built-in-shortcodes&#34;&gt;Built-in Shortcodes&lt;/a&gt; for rich content, along with a &lt;a href=&#34;https://gohugo.io/about/hugo-and-gdpr/&#34;&gt;Privacy Config&lt;/a&gt; and a set of Simple Shortcodes that enable static and no-JS versions of various social media embeds.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Placeholder Text</title>
-      <link>/posts/placeholder-text/</link>
+      <link>//localhost:1313/posts/placeholder-text/</link>
       <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/posts/placeholder-text/</guid>
+      <guid>//localhost:1313/posts/placeholder-text/</guid>
       <description>&lt;p&gt;Lorem est tota propiore conpellat pectoribus de pectora summo.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Math Typesetting</title>
-      <link>/posts/math-typesetting/</link>
+      <link>//localhost:1313/posts/math-typesetting/</link>
       <pubDate>Fri, 08 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/posts/math-typesetting/</guid>
+      <guid>//localhost:1313/posts/math-typesetting/</guid>
       <description>&lt;p&gt;Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Emoji Support</title>
-      <link>/posts/emoji-support/</link>
+      <link>//localhost:1313/posts/emoji-support/</link>
       <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>/posts/emoji-support/</guid>
+      <guid>//localhost:1313/posts/emoji-support/</guid>
       <description>&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;</description>
     </item>
   </channel>
