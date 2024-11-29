@@ -26,6 +26,7 @@ In this example we will be using [KaTeX](https://katex.org/)
 
 **Note:** Use the online reference of [Supported TeX Functions](https://katex.org/docs/supported.html)
 
+
 {{< math.inline >}}
 {{ if or .Page.Params.math .Site.Params.math }}
 <!-- KaTeX -->

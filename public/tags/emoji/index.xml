@@ -6,14 +6,14 @@
     <description>Recent content in Emoji on </description>
     <generator>Hugo</generator>
     <language>en</language>
-    <managingEditor>email@example.com (Steven  Geovino)</managingEditor>
-    <webMaster>email@example.com (Steven  Geovino)</webMaster>
+    <managingEditor>matatatenggo@gmail.com (Steven  Geovino)</managingEditor>
+    <webMaster>matatatenggo@gmail.com (Steven  Geovino)</webMaster>
     <lastBuildDate>Tue, 05 Mar 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="//localhost:1313/tags/emoji/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Emoji Support</title>
       <link>//localhost:1313/posts/emoji-support/</link>
-      <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate><author>email@example.com (Steven  Geovino)</author>
+      <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
       <guid>//localhost:1313/posts/emoji-support/</guid>
       <description>&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;</description>
     </item>

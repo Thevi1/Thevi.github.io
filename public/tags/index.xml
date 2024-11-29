@@ -6,63 +6,70 @@
     <description>Recent content in Tags on </description>
     <generator>Hugo</generator>
     <language>en</language>
-    <managingEditor>email@example.com (Steven  Geovino)</managingEditor>
-    <webMaster>email@example.com (Steven  Geovino)</webMaster>
+    <managingEditor>matatatenggo@gmail.com (Steven  Geovino)</managingEditor>
+    <webMaster>matatatenggo@gmail.com (Steven  Geovino)</webMaster>
     <lastBuildDate>Thu, 28 Nov 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="//localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Index</title>
       <link>//localhost:1313/tags/index/</link>
-      <pubDate>Thu, 28 Nov 2024 00:00:00 +0000</pubDate><author>email@example.com (Steven  Geovino)</author>
+      <pubDate>Thu, 28 Nov 2024 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
       <guid>//localhost:1313/tags/index/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Networking</title>
+      <link>//localhost:1313/tags/networking/</link>
+      <pubDate>Thu, 28 Nov 2024 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
+      <guid>//localhost:1313/tags/networking/</guid>
       <description></description>
     </item>
     <item>
       <title>Css</title>
       <link>//localhost:1313/tags/css/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><author>email@example.com (Steven  Geovino)</author>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
       <guid>//localhost:1313/tags/css/</guid>
       <description></description>
     </item>
     <item>
       <title>Html</title>
       <link>//localhost:1313/tags/html/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><author>email@example.com (Steven  Geovino)</author>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
       <guid>//localhost:1313/tags/html/</guid>
       <description></description>
     </item>
     <item>
       <title>Markdown</title>
       <link>//localhost:1313/tags/markdown/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><author>email@example.com (Steven  Geovino)</author>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
       <guid>//localhost:1313/tags/markdown/</guid>
       <description></description>
     </item>
     <item>
       <title>Privacy</title>
       <link>//localhost:1313/tags/privacy/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate><author>email@example.com (Steven  Geovino)</author>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
       <guid>//localhost:1313/tags/privacy/</guid>
       <description></description>
     </item>
     <item>
       <title>Shortcodes</title>
       <link>//localhost:1313/tags/shortcodes/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate><author>email@example.com (Steven  Geovino)</author>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
       <guid>//localhost:1313/tags/shortcodes/</guid>
       <description></description>
     </item>
     <item>
       <title>Text</title>
       <link>//localhost:1313/tags/text/</link>
-      <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate><author>email@example.com (Steven  Geovino)</author>
+      <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
       <guid>//localhost:1313/tags/text/</guid>
       <description></description>
     </item>
     <item>
       <title>Emoji</title>
       <link>//localhost:1313/tags/emoji/</link>
-      <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate><author>email@example.com (Steven  Geovino)</author>
+      <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
       <guid>//localhost:1313/tags/emoji/</guid>
       <description></description>
     </item>

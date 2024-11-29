@@ -6,14 +6,14 @@
     <description>Recent content in Shortcodes on </description>
     <generator>Hugo</generator>
     <language>en</language>
-    <managingEditor>email@example.com (Steven  Geovino)</managingEditor>
-    <webMaster>email@example.com (Steven  Geovino)</webMaster>
+    <managingEditor>matatatenggo@gmail.com (Steven  Geovino)</managingEditor>
+    <webMaster>matatatenggo@gmail.com (Steven  Geovino)</webMaster>
     <lastBuildDate>Sun, 10 Mar 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="//localhost:1313/tags/shortcodes/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Rich Content</title>
       <link>//localhost:1313/posts/rich-content/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate><author>email@example.com (Steven  Geovino)</author>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
       <guid>//localhost:1313/posts/rich-content/</guid>
       <description>&lt;p&gt;Hugo ships with several &lt;a href=&#34;https://gohugo.io/content-management/shortcodes/#use-hugos-built-in-shortcodes&#34;&gt;Built-in Shortcodes&lt;/a&gt; for rich content, along with a &lt;a href=&#34;https://gohugo.io/about/hugo-and-gdpr/&#34;&gt;Privacy Config&lt;/a&gt; and a set of Simple Shortcodes that enable static and no-JS versions of various social media embeds.&lt;/p&gt;</description>
     </item>
