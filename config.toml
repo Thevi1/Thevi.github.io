@@ -68,6 +68,3 @@ aria = "My e-Mail Address"
 
   [markup.highlight]
     style = 'dracula'
-
-[params]
-    favicon = "/img/favicon.ico"
