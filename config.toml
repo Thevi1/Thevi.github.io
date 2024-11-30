@@ -52,3 +52,19 @@ name = "email"
 url = "mailto:matatatenggo@gmail.com"
 aria = "My e-Mail Address"
 
+[markup]
+  [markup.asciidocExt]
+    backend = 'html5'
+    extensions = []
+    failureLevel = 'fatal'
+    noHeaderOrFooter = true
+    preserveTOC = false
+    safeMode = 'server'
+    sectionNumbers = false
+    trace = false
+    verbose = false
+    workingFolderCurrent = false
+    [markup.asciidocExt.attributes]
+
+  [markup.highlight]
+    style = 'dracula'
