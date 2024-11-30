@@ -16,11 +16,12 @@ theme = "nightfall"
     url = "/about"
 
 [params]
-user = "hello this"
+user = "Hello There"
 hostname = "thevi.web.id"
   [params.author]
     name = "Steven  Geovino"  # Website and RSS feed author
     email = "matatatenggo@gmail.com"  # RSS feed email address
+favicon = "img/favicon.ico"
 
 
 readingTime = true  # Show reading time on post page
