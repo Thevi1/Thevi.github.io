@@ -9,8 +9,7 @@ tags = [
 ]
 +++
 
-This Blog is for documenting my lab about route server using [open IXP Manager](https://www.ixpmanager.org/)
-<!--more-->
+This Blog is for documenting my lab <!--more--> about route server using, [open IXP Manager](https://www.ixpmanager.org/)
 
 Here is my lab topologi, 
 
