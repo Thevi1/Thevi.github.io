@@ -82,31 +82,40 @@ Route Server | Steven  Geovino
             
             
                 <dt>reading time</dt>
-                <dd>2 minutes</dd>
+                <dd>11 minutes</dd>
             
         </dl>
     </section>
     
     <div>
-        <p>How route server work?, lets see how that things work</p>
+        <p>How route server work?, lets see how this things work</p>
 <p>This Blog is for documented my lab about route server using <a href="https://www.ixpmanager.org/">IXP Manager</a></p>
-<p>In production you can see <a href="https://squad.iix.net.id/login">hare</a></p>
+<p>In production you can see <a href="https://squad.iix.net.id/login">here</a></p>
 <p>So much tool like IXP Manager, to manage Internet Exchange Point, the other things is <a href="https://github.com/alice-lg/alice-lg">Alice Looking Glass</a>,
-but i use IXP Manager because this tool so much feature to manage Internet Exchange Point.</p>
-<p>First we must undestand <a href="https://bird.network.cz/">BGP bird</a>, because in ixp manager using bgp bird version 2 and then bird is can be customized.</p>
+but i use IXP Manager because this tool so much feature to manage Internet Exchange Point by UI.</p>
+<p>First we must undestand <a href="https://bird.network.cz/">BGP bird</a>, because in ixp manager using bgp bird version 2 because bird is can be customized.</p>
 <p>Here is my lab topologi,</p>
 <p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/TOPO.PNG" alt="Topologi"></p>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ol>
 <li><a href="#what-is-route-server">What is Route Server?</a></li>
 <li><a href="#how-crucial-route-server-on-data-center">How Crucial Route Server on Data Center</a></li>
+<li><a href="#ixp-manager-ui">IXP Manager UI</a></li>
+<li><a href="#how-ixp-manager-work">How IXP manager Work</a></li>
+<li><a href="#route-server-configure">Route Server Configuration</a>
+<ul>
+<li><a href="#route-server-filtering">Route Server Filtering</a></li>
+<li><a href="#route-server-client-configuration">Route Server client configuration</a></li>
+</ul>
+</li>
+<li><a href="#route-server-filterig-from-ui">Route Server Filterig From UI</a></li>
+<li><a href="#forward-traffic">Forward Traffc</a></li>
 </ol>
 <hr>
 <h2 id="what-is-route-server">What is Route Server</h2>
 <p>Route servers facilitate the sharing of routing information between multiple autonomous systems (ASes) without each network having to directly establish multiple peer-to-peer BGP (Border Gateway Protocol) sessions. This is especially useful in an IXP environment, where multiple networks (ISPs, data centers, etc.) connect to a common exchange.</p>
 <h2 id="how-crucial-route-server-on-data-center">How Crucial Route Server on Data Center</h2>
 <p>Let undestand how crucial route server is.</p>
-<h3 id="peering-simplification">Peering Simplification</h3>
 <ul>
 <li>
 <h4 id="simplifies-peering-relationships">Simplifies Peering Relationships</h4>
@@ -116,7 +125,373 @@ but i use IXP Manager because this tool so much feature to manage Internet Excha
 <h4 id="reduces-complexity">Reduces Complexity</h4>
 </li>
 <li>large-scale data centers or IXPs, where many networks peer with each other, a route server simplifies peering management and reduces the number of direct connections required, saving time and effort.</li>
+<li>
+<h4 id="security">Security</h4>
+</li>
+<li>Route servers often implement security measures, such as prefix filtering and route validation, to prevent malicious or incorrect routing information from being propagated. This helps in safeguarding the network from attacks like prefix hijacking or route leaks.</li>
+<li>
+<h4 id="scalability">Scalability</h4>
+</li>
+<li>As the number of connected networks in a data center or IXP increases, a route server provides scalability by automatically managing the routing information exchanges for all networks involved, without overwhelming the administrators with manual configurations.</li>
+<li>
+<h4 id="efficient-bandwidth-utilization">Efficient Bandwidth Utilization</h4>
+</li>
+<li>By enabling peering between different networks in a data center, route servers can help reduce the reliance on third-party transit providers, leading to better control over bandwidth costs and traffic distribution.</li>
 </ul>
+<h2 id="ixp-manager-ui">IXP Manager UI</h2>
+<p>UI and feature for administrator to manage IXP manager</p>
+<p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/UI-admin.png" alt="UI For Admin"></p>
+<p>UI and feature for member</p>
+<p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/UI-member.png" alt="UI For Admin"></p>
+<h2 id="how-ixp-manager-work">How IXP Manager Work</h2>
+<p>IXP manager will push configure to Route Server via API,</p>
+<p>Here is flow how IXP manager push configure</p>
+<p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/RS-FLOW.png" alt="Flow IXP Manager"></p>
+<p>Route Server need reconfigure script to get update from IXP manager <a href="https://raw.githubusercontent.com/inex/IXP-Manager/refs/heads/master/tools/runtime/route-servers/api-reconfigure-example-birdv2.sh">here</a> is reconfigure config file for route server</p>
+<p>To reconfigure both IPV4 and IPV6 you can use <a href="https://raw.githubusercontent.com/inex/IXP-Manager/refs/heads/master/tools/runtime/route-servers/api-reconfigure-all.sh">this</a> config file</p>
+<p>In the config file you need api key and handle to get update config from IXP Manager</p>
+<p>Here is reconfigure both ipv4 and ipv6 in my route server</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;Reconfiguring all bird instances:&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># These handles should match the definitions in config/routers.php, and</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># should be changed as appropriate:</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">for</span> handle in rs2-vl2000-ipv4 rs2-vl2000-ipv6; <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">echo</span> -ne <span style="color:#f1fa8c">&#34;HANDLE: </span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">handle</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">: &#34;</span>
+</span></span><span style="display:flex;"><span>    /usr/local/sbin/api-reconfigure-rs2-birdv2.sh -f -h <span style="color:#8be9fd;font-style:italic">$handle</span> -q
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">[[</span> <span style="color:#8be9fd;font-style:italic">$?</span> -eq <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">]]</span>; <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">echo</span> -ne <span style="color:#f1fa8c">&#34;OK    &#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">else</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">echo</span> -ne <span style="color:#f1fa8c">&#34;ERROR &#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">fi</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">echo</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">done</span>
+</span></span></code></pre></div><p>Handle You can get in the routers menu</p>
+<p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Handle-Route-Server.png" alt="Routers Menu"></p>
+<p>In the route server using cron job to get update from IXP manager</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># /etc/crontab: system-wide crontab</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Unlike any other crontab you don&#39;t have to run the `crontab&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># command to install the new version when you edit this file</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># and files in /etc/cron.d. These files also have username fields,</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># that none of the other crontabs do.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">SHELL</span><span style="color:#ff79c6">=</span>/bin/sh
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">PATH</span><span style="color:#ff79c6">=</span>/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Example of job definition:</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># .---------------- minute (0 - 59)</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># |  .------------- hour (0 - 23)</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># |  |  .---------- day of month (1 - 31)</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># |  |  |  |  |</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># *  *  *  *  * user-name command to be executed</span>
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">17</span> *    * * *   root    <span style="color:#8be9fd;font-style:italic">cd</span> / <span style="color:#ff79c6">&amp;&amp;</span> run-parts --report /etc/cron.hourly
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">25</span> <span style="color:#bd93f9">6</span>    * * *   root    <span style="color:#8be9fd;font-style:italic">test</span> -x /usr/sbin/anacron <span style="color:#ff79c6">||</span> <span style="color:#ff79c6">(</span> <span style="color:#8be9fd;font-style:italic">cd</span> / <span style="color:#ff79c6">&amp;&amp;</span> run-parts --report /etc/cron.daily <span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">47</span> <span style="color:#bd93f9">6</span>    * * <span style="color:#bd93f9">7</span>   root    <span style="color:#8be9fd;font-style:italic">test</span> -x /usr/sbin/anacron <span style="color:#ff79c6">||</span> <span style="color:#ff79c6">(</span> <span style="color:#8be9fd;font-style:italic">cd</span> / <span style="color:#ff79c6">&amp;&amp;</span> run-parts --report /etc/cron.weekly <span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">52</span> <span style="color:#bd93f9">6</span>    <span style="color:#bd93f9">1</span> * *   root    <span style="color:#8be9fd;font-style:italic">test</span> -x /usr/sbin/anacron <span style="color:#ff79c6">||</span> <span style="color:#ff79c6">(</span> <span style="color:#8be9fd;font-style:italic">cd</span> / <span style="color:#ff79c6">&amp;&amp;</span> run-parts --report /etc/cron.monthly <span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Get update from IXP manager every 1 hour</span>
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">0</span> *     * * *   root   /usr/local/sbin/api-reconfigure-all.sh &gt; /dev/null
+</span></span></code></pre></div><h2 id="route-server-configure">Route Server Configure</h2>
+<p>In this section I will explain configure the route server</p>
+<h3 id="route-server-filtering">Route Server Filtering</h3>
+<p>First I will explain how route server filtering prefix</p>
+<p>In the route server all prefix is filtered by BGP Community (standar and large community)</p>
+<p>Here is the example large community filtering on route server</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">## These will all be filtered and not piped to the master table:</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_FILTERED_PREFIX_LEN_TOO_LONG</span>      <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1101, <span style="color:#bd93f9">1</span>  <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_FILTERED_PREFIX_LEN_TOO_SHORT</span>     <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1101, <span style="color:#bd93f9">2</span>  <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_FILTERED_BOGON</span>                    <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1101, <span style="color:#bd93f9">3</span>  <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_FILTERED_BOGON_ASN</span>                <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1101, <span style="color:#bd93f9">4</span>  <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_FILTERED_AS_PATH_TOO_LONG</span>         <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1101, <span style="color:#bd93f9">5</span>  <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_FILTERED_AS_PATH_TOO_SHORT</span>        <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1101, <span style="color:#bd93f9">6</span>  <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_FILTERED_FIRST_AS_NOT_PEER_AS</span>     <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1101, <span style="color:#bd93f9">7</span>  <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_FILTERED_NEXT_HOP_NOT_PEER_IP</span>     <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1101, <span style="color:#bd93f9">8</span>  <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_FILTERED_IRRDB_PREFIX_FILTERED</span>    <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1101, <span style="color:#bd93f9">9</span>  <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_FILTERED_IRRDB_ORIGIN_AS_FILTERED</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1101, <span style="color:#bd93f9">10</span> <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_FILTERED_PREFIX_NOT_IN_ORIGIN_AS</span>  <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1101, <span style="color:#bd93f9">11</span> <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_FILTERED_RPKI_UNKNOWN</span>             <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1101, <span style="color:#bd93f9">12</span> <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_FILTERED_RPKI_INVALID</span>             <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1101, <span style="color:#bd93f9">13</span> <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_FILTERED_TRANSIT_FREE_ASN</span>         <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1101, <span style="color:#bd93f9">14</span> <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_FILTERED_TOO_MANY_COMMUNITIES</span>     <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1101, <span style="color:#bd93f9">15</span> <span style="color:#ff79c6">)</span>;
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Informational prefixes</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_INFO_RPKI_VALID</span>       <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1000, <span style="color:#bd93f9">1</span>  <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_INFO_RPKI_UNKNOWN</span>     <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1000, <span style="color:#bd93f9">2</span>  <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_INFO_RPKI_NOT_CHECKED</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1000, <span style="color:#bd93f9">3</span>  <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_INFO_IRRDB_VALID</span>         <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1001, <span style="color:#bd93f9">1</span>  <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_INFO_IRRDB_NOT_CHECKED</span>   <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1001, <span style="color:#bd93f9">2</span>  <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_INFO_IRRDB_MORE_SPECIFIC</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1001, <span style="color:#bd93f9">3</span>  <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_INFO_IRRDB_FILTERED_LOOSE</span>  <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1001, <span style="color:#bd93f9">1000</span> <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_INFO_IRRDB_FILTERED_STRICT</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1001, <span style="color:#bd93f9">1001</span> <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_INFO_IRRDB_PREFIX_EMPTY</span>    <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1001, <span style="color:#bd93f9">1002</span> <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">IXP_LC_INFO_SAME_AS_NEXT_HOP</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span> routeserverasn, 1001, <span style="color:#bd93f9">1200</span> <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># ( routeserverasn, 1010, peerasn ) -&gt; route learnt from peerasn via routeserverasn</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># ( routeserverasn, 1011, originasn ) -&gt; route origin asn via routeserverasn</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># And the filter for examining routes in the peers import table being exported</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># to the master table</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>filter f_export_to_master
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> bgp_large_community ~ <span style="color:#ff79c6">[(</span> routeserverasn, 1101, * <span style="color:#ff79c6">)]</span> <span style="color:#ff79c6">then</span> reject;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    accept;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
+</span></span></code></pre></div><p>Here is Standard IXP community filter</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> ixp_community_filter<span style="color:#ff79c6">(</span>int peerasn<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> !<span style="color:#ff79c6">(</span><span style="color:#8be9fd;font-style:italic">source</span> <span style="color:#ff79c6">=</span> RTS_BGP<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">return</span> false;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># AS path prepending</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>routeserverasn, 103, peerasn<span style="color:#ff79c6">)</span> ~ bgp_large_community <span style="color:#ff79c6">then</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        bgp_path.prepend<span style="color:#ff79c6">(</span> bgp_path.first <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>        bgp_path.prepend<span style="color:#ff79c6">(</span> bgp_path.first <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>        bgp_path.prepend<span style="color:#ff79c6">(</span> bgp_path.first <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span> <span style="color:#ff79c6">else</span> <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>routeserverasn, 102, peerasn<span style="color:#ff79c6">)</span> ~ bgp_large_community <span style="color:#ff79c6">then</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        bgp_path.prepend<span style="color:#ff79c6">(</span> bgp_path.first <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>        bgp_path.prepend<span style="color:#ff79c6">(</span> bgp_path.first <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span> <span style="color:#ff79c6">else</span> <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>routeserverasn, 101, peerasn<span style="color:#ff79c6">)</span> ~ bgp_large_community <span style="color:#ff79c6">then</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        bgp_path.prepend<span style="color:#ff79c6">(</span> bgp_path.first <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span> <span style="color:#ff79c6">else</span> <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>routeserverasn, 103, 0<span style="color:#ff79c6">)</span> ~ bgp_large_community <span style="color:#ff79c6">then</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        bgp_path.prepend<span style="color:#ff79c6">(</span> bgp_path.first <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>        bgp_path.prepend<span style="color:#ff79c6">(</span> bgp_path.first <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>        bgp_path.prepend<span style="color:#ff79c6">(</span> bgp_path.first <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span> <span style="color:#ff79c6">else</span> <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>routeserverasn, 102, 0<span style="color:#ff79c6">)</span> ~ bgp_large_community <span style="color:#ff79c6">then</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        bgp_path.prepend<span style="color:#ff79c6">(</span> bgp_path.first <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>        bgp_path.prepend<span style="color:#ff79c6">(</span> bgp_path.first <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span> <span style="color:#ff79c6">else</span> <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>routeserverasn, 101, 0<span style="color:#ff79c6">)</span> ~ bgp_large_community <span style="color:#ff79c6">then</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        bgp_path.prepend<span style="color:#ff79c6">(</span> bgp_path.first <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># support for BGP Large Communities</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>routeserverasn, 0, peerasn<span style="color:#ff79c6">)</span> ~ bgp_large_community <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">return</span> false;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>routeserverasn, 1, peerasn<span style="color:#ff79c6">)</span> ~ bgp_large_community <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">return</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>routeserverasn, 0, 0<span style="color:#ff79c6">)</span> ~ bgp_large_community <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">return</span> false;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>routeserverasn, 1, 0<span style="color:#ff79c6">)</span> ~ bgp_large_community <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">return</span> true;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># it&#39;s unwise to conduct a 32-bit check on a 16-bit value</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> routeserverasn &gt; <span style="color:#bd93f9">65535</span> <span style="color:#ff79c6">||</span> peerasn &gt; <span style="color:#bd93f9">65535</span> <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">return</span> true;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># Implement widely used community filtering schema.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>0, peerasn<span style="color:#ff79c6">)</span> ~ bgp_community <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">return</span> false;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>routeserverasn, peerasn<span style="color:#ff79c6">)</span> ~ bgp_community <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">return</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>0, routeserverasn<span style="color:#ff79c6">)</span> ~ bgp_community <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">return</span> false;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> true;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
+</span></span></code></pre></div><p>Function below is for filter all bogon ipv4 prefix</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># This function excludes weird networks</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#  rfc1918, class D, class E, too long and too short prefixes</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> avoid_martians<span style="color:#ff79c6">()</span>
+</span></span><span style="display:flex;"><span>prefix <span style="color:#8be9fd;font-style:italic">set</span> martians;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">martians</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">[</span>
+</span></span><span style="display:flex;"><span>                0.0.0.0/32-,            <span style="color:#6272a4"># rfc5735 Special Use IPv4 Addresses</span>
+</span></span><span style="display:flex;"><span>                0.0.0.0/0<span style="color:#ff79c6">{</span>0,7<span style="color:#ff79c6">}</span>,         <span style="color:#6272a4"># rfc1122 Requirements for Internet Hosts -- Communication Layers 3.2.1.3</span>
+</span></span><span style="display:flex;"><span>                10.0.0.0/8+,            <span style="color:#6272a4"># rfc1918 Address Allocation for Private Internets</span>
+</span></span><span style="display:flex;"><span>                100.64.0.0/10+,         <span style="color:#6272a4"># rfc6598 IANA-Reserved IPv4 Prefix for Shared Address Space</span>
+</span></span><span style="display:flex;"><span>                127.0.0.0/8+,           <span style="color:#6272a4"># rfc1122 Requirements for Internet Hosts -- Communication Layers 3.2.1.3</span>
+</span></span><span style="display:flex;"><span>                169.254.0.0/16+,        <span style="color:#6272a4"># rfc3927 Dynamic Configuration of IPv4 Link-Local Addresses</span>
+</span></span><span style="display:flex;"><span>                172.16.0.0/12+,         <span style="color:#6272a4"># rfc1918 Address Allocation for Private Internets</span>
+</span></span><span style="display:flex;"><span>                192.0.0.0/24+,          <span style="color:#6272a4"># rfc6890 Special-Purpose Address Registries</span>
+</span></span><span style="display:flex;"><span>                192.0.2.0/24+,          <span style="color:#6272a4"># rfc5737 IPv4 Address Blocks Reserved for Documentation</span>
+</span></span><span style="display:flex;"><span>                192.168.0.0/16+,        <span style="color:#6272a4"># rfc1918 Address Allocation for Private Internets</span>
+</span></span><span style="display:flex;"><span>                198.18.0.0/15+,         <span style="color:#6272a4"># rfc2544 Benchmarking Methodology for Network Interconnect Devices</span>
+</span></span><span style="display:flex;"><span>                198.51.100.0/24+,       <span style="color:#6272a4"># rfc5737 IPv4 Address Blocks Reserved for Documentation</span>
+</span></span><span style="display:flex;"><span>                203.0.113.0/24+,        <span style="color:#6272a4"># rfc5737 IPv4 Address Blocks Reserved for Documentation</span>
+</span></span><span style="display:flex;"><span>                224.0.0.0/4+,           <span style="color:#6272a4"># rfc1112 Host Extensions for IP Multicasting</span>
+</span></span><span style="display:flex;"><span>                240.0.0.0/4+            <span style="color:#6272a4"># rfc6890 Special-Purpose Address Registries</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">]</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4"># Avoid RFC1918 and similar networks</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> net ~ martians <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">return</span> false;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> true;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
+</span></span></code></pre></div><p>Function below is for filter all bogon ipv6 prefix</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># This function excludes weird networks</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#  rfc1918, class D, class E, too long and too short prefixes</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> avoid_martians<span style="color:#ff79c6">()</span>
+</span></span><span style="display:flex;"><span>prefix <span style="color:#8be9fd;font-style:italic">set</span> martians;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">martians</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">[</span>
+</span></span><span style="display:flex;"><span>                ::/0,                   <span style="color:#6272a4"># Default (can be advertised as a route in BGP to peers if desired)</span>
+</span></span><span style="display:flex;"><span>                ::/96,                  <span style="color:#6272a4"># IPv4-compatible IPv6 address - deprecated by RFC4291</span>
+</span></span><span style="display:flex;"><span>                ::/128,                 <span style="color:#6272a4"># Unspecified address</span>
+</span></span><span style="display:flex;"><span>                ::1/128,                <span style="color:#6272a4"># Local host loopback address</span>
+</span></span><span style="display:flex;"><span>                ::ffff:0.0.0.0/96+,     <span style="color:#6272a4"># IPv4-mapped addresses</span>
+</span></span><span style="display:flex;"><span>                ::224.0.0.0/100+,       <span style="color:#6272a4"># Compatible address (IPv4 format)</span>
+</span></span><span style="display:flex;"><span>                ::127.0.0.0/104+,       <span style="color:#6272a4"># Compatible address (IPv4 format)</span>
+</span></span><span style="display:flex;"><span>                ::0.0.0.0/104+,         <span style="color:#6272a4"># Compatible address (IPv4 format)</span>
+</span></span><span style="display:flex;"><span>                ::255.0.0.0/104+,       <span style="color:#6272a4"># Compatible address (IPv4 format)</span>
+</span></span><span style="display:flex;"><span>                0000::/8+,              <span style="color:#6272a4"># Pool used for unspecified, loopback and embedded IPv4 addresses</span>
+</span></span><span style="display:flex;"><span>                0200::/7+,              <span style="color:#6272a4"># OSI NSAP-mapped prefix set (RFC4548) - deprecated by RFC4048</span>
+</span></span><span style="display:flex;"><span>                3ffe::/16+,             <span style="color:#6272a4"># Former 6bone, now decommissioned</span>
+</span></span><span style="display:flex;"><span>                2001:db8::/32+,         <span style="color:#6272a4"># Reserved by IANA for special purposes and documentation</span>
+</span></span><span style="display:flex;"><span>                2002:e000::/20+,        <span style="color:#6272a4"># Invalid 6to4 packets (IPv4 multicast)</span>
+</span></span><span style="display:flex;"><span>                2002:7f00::/24+,        <span style="color:#6272a4"># Invalid 6to4 packets (IPv4 loopback)</span>
+</span></span><span style="display:flex;"><span>                2002:0000::/24+,        <span style="color:#6272a4"># Invalid 6to4 packets (IPv4 default)</span>
+</span></span><span style="display:flex;"><span>                2002:ff00::/24+,        <span style="color:#6272a4"># Invalid 6to4 packets</span>
+</span></span><span style="display:flex;"><span>                2002:0a00::/24+,        <span style="color:#6272a4"># Invalid 6to4 packets (IPv4 private 10.0.0.0/8 network)</span>
+</span></span><span style="display:flex;"><span>                2002:ac10::/28+,        <span style="color:#6272a4"># Invalid 6to4 packets (IPv4 private 172.16.0.0/12 network)</span>
+</span></span><span style="display:flex;"><span>                2002:c0a8::/32+,        <span style="color:#6272a4"># Invalid 6to4 packets (IPv4 private 192.168.0.0/16 network)</span>
+</span></span><span style="display:flex;"><span>                fc00::/7+,              <span style="color:#6272a4"># Unicast Unique Local Addresses (ULA) - RFC 4193</span>
+</span></span><span style="display:flex;"><span>                fe80::/10+,             <span style="color:#6272a4"># Link-local Unicast</span>
+</span></span><span style="display:flex;"><span>                fec0::/10+,             <span style="color:#6272a4"># Site-local Unicast - deprecated by RFC 3879 (replaced by ULA)</span>
+</span></span><span style="display:flex;"><span>                ff00::/8+               <span style="color:#6272a4"># Multicast</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">]</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4"># Avoid RFC1918 and similar networks</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> net ~ martians <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">return</span> false;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> true;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
+</span></span></code></pre></div><p>If in the route server enable RPKI filtering, below function to filtering with RPKI,</p>
+<p>In this lab i enable RPKI filtering and using <a href="https://routinator.docs.nlnetlabs.nl/en/stable/">Routinator3000</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>roa4 table t_roa;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>protocol rpki rpki1 <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    roa4 <span style="color:#ff79c6">{</span> table t_roa; <span style="color:#ff79c6">}</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    remote <span style="color:#f1fa8c">&#34;REMOTE-RPKI-SERVER&#34;</span> port 3323;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    retry keep 90;
+</span></span><span style="display:flex;"><span>    refresh keep 900;
+</span></span><span style="display:flex;"><span>    expire keep 172800;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>/*
+</span></span><span style="display:flex;"><span> * RPKI check <span style="color:#ff79c6">for</span> the path
+</span></span><span style="display:flex;"><span> *
+</span></span><span style="display:flex;"><span> * <span style="color:#ff79c6">return</span>: <span style="color:#8be9fd;font-style:italic">true</span> means the filter should stop processing, <span style="color:#8be9fd;font-style:italic">false</span> means keep processing
+</span></span><span style="display:flex;"><span> */
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> filter_rpki<span style="color:#ff79c6">()</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># RPKI check</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span><span style="color:#ff79c6">(</span> roa_check<span style="color:#ff79c6">(</span> t_roa, net, bgp_path.last_nonaggregated <span style="color:#ff79c6">)</span> <span style="color:#ff79c6">=</span> ROA_INVALID <span style="color:#ff79c6">)</span> <span style="color:#ff79c6">then</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        print <span style="color:#f1fa8c">&#34;Tagging invalid ROA &#34;</span>, net, <span style="color:#f1fa8c">&#34; for ASN &#34;</span>, bgp_path.last;
+</span></span><span style="display:flex;"><span>        bgp_large_community.add<span style="color:#ff79c6">(</span> IXP_LC_FILTERED_RPKI_INVALID <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span><span style="color:#ff79c6">(</span> roa_check<span style="color:#ff79c6">(</span> t_roa, net, bgp_path.last_nonaggregated <span style="color:#ff79c6">)</span> <span style="color:#ff79c6">=</span> ROA_VALID <span style="color:#ff79c6">)</span> <span style="color:#ff79c6">then</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        bgp_large_community.add<span style="color:#ff79c6">(</span> IXP_LC_INFO_RPKI_VALID <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># RPKI unknown, keep checking and mark as unknown for info</span>
+</span></span><span style="display:flex;"><span>    bgp_large_community.add<span style="color:#ff79c6">(</span> IXP_LC_INFO_RPKI_UNKNOWN <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> false;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
+</span></span></code></pre></div><p>Here is to filtering Transit ASN</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Filtering the following ASNs:</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 174 - Cogent</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 701 - UUNET</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 1299 - Telia</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 2914 - NTT Communications</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 3257 - GTT Backbone</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 3320 - Deutsche Telekom AG (DTAG)</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 3356 - Level3</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 3491 - PCCW</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 4134 - Chinanet</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 5511 - Orange opentransit</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 6453 - Tata Communications</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 6461 - Zayo Bandwidth</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 6762 - Seabone / Telecom Italia</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 6830 - Liberty Global</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 7018 - AT&amp;T</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>define <span style="color:#8be9fd;font-style:italic">TRANSIT_ASNS</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">[</span> 174, 701, 1299, 2914, 3257, 3320, 3356, 3491, 4134, 5511, 6453, 6461, 6762, 6830, <span style="color:#bd93f9">7018</span> <span style="color:#ff79c6">]</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> filter_has_transit_path<span style="color:#ff79c6">()</span>
+</span></span><span style="display:flex;"><span>int <span style="color:#8be9fd;font-style:italic">set</span> transit_asns;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">transit_asns</span> <span style="color:#ff79c6">=</span> TRANSIT_ASNS;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>bgp_path ~ transit_asns<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">then</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        bgp_large_community.add<span style="color:#ff79c6">(</span> IXP_LC_FILTERED_TRANSIT_FREE_ASN <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> false;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
+</span></span></code></pre></div><h3 id="route-server-client-configuration">Route Server client configuration</h3>
+<p>Config below is for export all prefix IPV4 that have been filtered to all member</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>template bgp tb_rsclient <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">local</span> as routeserverasn;
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">source</span> address routeserveraddress;
+</span></span><span style="display:flex;"><span>    strict <span style="color:#8be9fd;font-style:italic">bind</span> yes;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># give RPKI-RTR a chance to start and populate</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># (RPKI is /really/ quick)</span>
+</span></span><span style="display:flex;"><span>    connect delay <span style="color:#8be9fd;font-style:italic">time</span> 30;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    interpret communities off;  <span style="color:#6272a4"># enable rfc1997 well-known community pass through</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    ipv4 <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">export</span> all;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    rs client;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
+</span></span></code></pre></div><p>Config below is for export all prefix IPV6 that have been filtered to all member</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>template bgp tb_rsclient <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">local</span> as routeserverasn;
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">source</span> address routeserveraddress;
+</span></span><span style="display:flex;"><span>    strict <span style="color:#8be9fd;font-style:italic">bind</span> yes;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># give RPKI-RTR a chance to start and populate</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># (RPKI is /really/ quick)</span>
+</span></span><span style="display:flex;"><span>    connect delay <span style="color:#8be9fd;font-style:italic">time</span> 30;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    interpret communities off;  <span style="color:#6272a4"># enable rfc1997 well-known community pass through</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    ipv6 <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">export</span> all;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    rs client;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
+</span></span></code></pre></div><h6 id="todo-route-server-community-explain">TODO route server community explain</h6>
+<h2 id="route-server-filterig-from-ui">Route Server Filterig From UI</h2>
+<h2 id="no-forward-traffic">No Forward Traffic</h2>
     </div>
 </div>
 
