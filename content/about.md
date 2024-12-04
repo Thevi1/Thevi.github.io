@@ -34,16 +34,13 @@ Some key responsibilities include:
 
 As a network engineer, having the right set of tools is essential. Here are some of the tools I use daily:
 
-### 1. **Cisco Packet Tracer**
-   A network simulation tool that helps visualize and test network configurations before implementing them in the real world.
+### 1. **Wireshark**
+   A powerful network protocol analyzer that allows us to capture and analyze packets traveling through the network. In mikrotik have tool name torch, like wireshark and this torch power full monitoring real time traffic.
 
-### 2. **Wireshark**
-   A powerful network protocol analyzer that allows us to capture and analyze packets traveling through the network.
-
-### 3. **Network Performance Monitor**
+### 2. **Network Performance Monitor**
    So much tool helps us to real-time monitoring of network performance, alerting us to any unusual activity or bottlenecks.
 
-### 4. **Pnet and Eve-ng Labs**
+### 3. **Pnet and Eve-ng Labs**
    A network security testing tool that provides valuable insights into the performance and security posture of network equipment.
 
 ## Common Challenges in Network Engineering
@@ -80,7 +77,7 @@ To keep your network running at peak performance, here are a few best practices 
 The field of networking is evolving rapidly, with new trends and technologies emerging every day. Here are some exciting developments:
 
 - **Software-Defined Networking (SDN)**: Allows for centralized control of network traffic, simplifying management and improving scalability.
-- **5G Networks**: With faster speeds and lower latency, 5G will significantly impact networking, especially for IoT devices.
+- **5G and 6G Networks**: With faster speeds and lower latency, 6G will significantly impact networking, especially for IoT devices.
 - **AI and Automation**: Artificial Intelligence will help automate network management, allowing engineers to focus on higher-level tasks and improving overall network performance.
 
 ## Conclusion
