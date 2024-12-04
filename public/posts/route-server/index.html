@@ -82,18 +82,19 @@ Route Server | Steven  Geovino
             
             
                 <dt>reading time</dt>
-                <dd>11 minutes</dd>
+                <dd>15 minutes</dd>
             
         </dl>
     </section>
     
     <div>
         <p>How route server work?, lets see how this things work</p>
+<p><em><strong>Don&rsquo;t forget your coffee before reading this :)</strong></em></p>
 <p>This Blog is for documented my lab about route server using <a href="https://www.ixpmanager.org/">IXP Manager</a></p>
 <p>In production you can see <a href="https://squad.iix.net.id/login">here</a></p>
 <p>So much tool like IXP Manager, to manage Internet Exchange Point, the other things is <a href="https://github.com/alice-lg/alice-lg">Alice Looking Glass</a>,
 but i use IXP Manager because this tool so much feature to manage Internet Exchange Point by UI.</p>
-<p>First we must undestand <a href="https://bird.network.cz/">BGP bird</a>, because in ixp manager using bgp bird version 2 because bird is can be customized.</p>
+<p>First we must undestand <a href="https://bird.network.cz/">BGP bird</a>, because in ixp manager using bgp bird version 2 and the other reason is because bird is can be customized.</p>
 <p>Here is my lab topologi,</p>
 <p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/TOPO.PNG" alt="Topologi"></p>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -101,7 +102,18 @@ but i use IXP Manager because this tool so much feature to manage Internet Excha
 <li><a href="#what-is-route-server">What is Route Server?</a></li>
 <li><a href="#how-crucial-route-server-on-data-center">How Crucial Route Server on Data Center</a></li>
 <li><a href="#ixp-manager-ui">IXP Manager UI</a></li>
-<li><a href="#how-ixp-manager-work">How IXP manager Work</a></li>
+<li><a href="#how-ixp-manager-and-route-server-work">How IXP Manager And Route Server Work</a>
+<ul>
+<li><a href="#flow-route-server-and-ixp-manager">Flow Route Server and IXP Manager</a></li>
+<li><a href="#reconfigure-script">Reconfigure Script</a></li>
+<li><a href="#flow-route-server-import-and-export-prefix">Flow How Route Server Export and Import Prefix</a>
+<ul>
+<li><a href="#flow-route-server-import-prefix">Flow route server import prefix</a></li>
+<li><a href="#flow-route-server-export-prefix">Flow route server export prefix</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="#route-server-configure">Route Server Configuration</a>
 <ul>
 <li><a href="#route-server-filtering">Route Server Filtering</a></li>
@@ -143,10 +155,16 @@ but i use IXP Manager because this tool so much feature to manage Internet Excha
 <p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/UI-admin.png" alt="UI For Admin"></p>
 <p>UI and feature for member</p>
 <p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/UI-member.png" alt="UI For Admin"></p>
-<h2 id="how-ixp-manager-work">How IXP Manager Work</h2>
+<p>In IXP Manager also have Looking glass for member to monitor all prefix, below LG for IPV4</p>
+<p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/LG-IPV4.PNG" alt="LG"></p>
+<p>Below LG for IPV6</p>
+<p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/LG-IPV6.PNG" alt="LG"></p>
+<h2 id="how-ixp-manager-and-route-server-work">How IXP Manager And Route Server Work</h2>
+<h4 id="flow-route-server-and-ixp-manager">Flow Route Server and IXP Manager</h4>
 <p>IXP manager will push configure to Route Server via API,</p>
 <p>Here is flow how IXP manager push configure</p>
 <p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/RS-FLOW.png" alt="Flow IXP Manager"></p>
+<h4 id="reconfigure-script">Reconfigure Script</h4>
 <p>Route Server need reconfigure script to get update from IXP manager <a href="https://raw.githubusercontent.com/inex/IXP-Manager/refs/heads/master/tools/runtime/route-servers/api-reconfigure-example-birdv2.sh">here</a> is reconfigure config file for route server</p>
 <p>To reconfigure both IPV4 and IPV6 you can use <a href="https://raw.githubusercontent.com/inex/IXP-Manager/refs/heads/master/tools/runtime/route-servers/api-reconfigure-all.sh">this</a> config file</p>
 <p>In the config file you need api key and handle to get update config from IXP Manager</p>
@@ -167,9 +185,10 @@ but i use IXP Manager because this tool so much feature to manage Internet Excha
 </span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">fi</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">echo</span>
 </span></span><span style="display:flex;"><span><span style="color:#ff79c6">done</span>
-</span></span></code></pre></div><p>Handle You can get in the routers menu</p>
+</span></span></code></pre></div><p>Handle You can get in routers menu</p>
 <p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Handle-Route-Server.png" alt="Routers Menu"></p>
-<p>In the route server using cron job to get update from IXP manager</p>
+<p>In route server using cron job to get update from IXP manager</p>
+<p>Here example in my lab, route server will get update from IXP Manager every 1 hour</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># /etc/crontab: system-wide crontab</span>
 </span></span><span style="display:flex;"><span><span style="color:#6272a4"># Unlike any other crontab you don&#39;t have to run the `crontab&#39;</span>
 </span></span><span style="display:flex;"><span><span style="color:#6272a4"># command to install the new version when you edit this file</span>
@@ -195,8 +214,40 @@ but i use IXP Manager because this tool so much feature to manage Internet Excha
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#6272a4"># Get update from IXP manager every 1 hour</span>
 </span></span><span style="display:flex;"><span><span style="color:#bd93f9">0</span> *     * * *   root   /usr/local/sbin/api-reconfigure-all.sh &gt; /dev/null
+</span></span></code></pre></div><h4 id="flow-route-server-import-and-export-prefix">Flow Route Server Import And Export Prefix</h4>
+<h5 id="flow-route-server-import-prefix">Flow route server import prefix</h5>
+<p>Here is flow how route server import prefix from member</p>
+<p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Import-Prefix-From-member-to-master-table.png" alt="Route Server Import Prefix"></p>
+<p>Bird will create routing table name <code>t_000X_asXXXXX</code> each member, in this table all prefix (filtered and accept prefix will place)</p>
+<p>And only accepted prefix will through to master table</p>
+<p>Filtered prefix will get large community tag.</p>
+<p>Here example prefix filtered get community tag</p>
+<p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Prefix-Filtered-example.png" alt="Example prefix filtered"></p>
+<h5 id="flow-route-server-export-prefix">Flow route server export prefix</h5>
+<p>Here is flow how route server export prefix to member</p>
+<p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Export-prefix-to-member-from-master-table.png" alt="Route Server Import Prefix"></p>
+<p>All accepted prefix pass through to member routing table and then strip route server tag, that means route server path not include, below example</p>
+<p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Prefix-example-view-from-member.png" alt="Path Example from member"></p>
+<p>So member got prefix from route server and look like that mamber direct peer to other member, interesting isn&rsquo;t it :)</p>
+<p>lets view detail some prefix</p>
+<p>example below is detail prefix 34.1.88.0/24 we got from route server</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>vyos# sh ip bgp 34.1.88.0/24
+</span></span><span style="display:flex;"><span>BGP routing table entry <span style="color:#ff79c6">for</span> 34.1.88.0/24, version <span style="color:#bd93f9">123</span>
+</span></span><span style="display:flex;"><span>Paths: <span style="color:#ff79c6">(</span><span style="color:#bd93f9">2</span> available, best <span style="color:#6272a4">#2, table default)</span>
+</span></span><span style="display:flex;"><span>  Not advertised to any peer
+</span></span><span style="display:flex;"><span>  <span style="color:#bd93f9">139190</span>
+</span></span><span style="display:flex;"><span>    123.108.8.10 from 123.108.8.200 <span style="color:#ff79c6">(</span>123.108.8.200<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      Origin IGP, metric 0, valid, external
+</span></span><span style="display:flex;"><span>      Community: 32934:7597
+</span></span><span style="display:flex;"><span>      Last update: Mon Nov <span style="color:#bd93f9">25</span> 01:00:02 <span style="color:#bd93f9">2024</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#bd93f9">139190</span>
+</span></span><span style="display:flex;"><span>    123.108.8.10 from 123.108.8.100 <span style="color:#ff79c6">(</span>123.108.8.100<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      Origin IGP, metric 0, valid, external, best <span style="color:#ff79c6">(</span>Router ID<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      Community: 32934:7597
+</span></span><span style="display:flex;"><span>      Last update: Mon Nov <span style="color:#bd93f9">25</span> 01:01:11 <span style="color:#bd93f9">2024</span>
+</span></span><span style="display:flex;"><span>vyos#
 </span></span></code></pre></div><h2 id="route-server-configure">Route Server Configure</h2>
-<p>In this section I will explain configure the route server</p>
+<p>In this section I will explain BGP bird configure for route server</p>
 <h3 id="route-server-filtering">Route Server Filtering</h3>
 <p>First I will explain how route server filtering prefix</p>
 <p>In the route server all prefix is filtered by BGP Community (standar and large community)</p>
@@ -378,7 +429,7 @@ but i use IXP Manager because this tool so much feature to manage Internet Excha
 </span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> true;
 </span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
 </span></span></code></pre></div><p>If in the route server enable RPKI filtering, below function to filtering with RPKI,</p>
-<p>In this lab i enable RPKI filtering and using <a href="https://routinator.docs.nlnetlabs.nl/en/stable/">Routinator3000</a></p>
+<p>In this lab i enable RPKI filtering using <a href="https://routinator.docs.nlnetlabs.nl/en/stable/">Routinator3000</a> for validation</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>roa4 table t_roa;
 </span></span><span style="display:flex;"><span>
@@ -450,7 +501,7 @@ but i use IXP Manager because this tool so much feature to manage Internet Excha
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> false;
 </span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
-</span></span></code></pre></div><h3 id="route-server-client-configuration">Route Server client configuration</h3>
+</span></span></code></pre></div><h4 id="route-server-client-configuration">Route Server client configuration</h4>
 <p>Config below is for export all prefix IPV4 that have been filtered to all member</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>template bgp tb_rsclient <span style="color:#ff79c6">{</span>
@@ -489,9 +540,186 @@ but i use IXP Manager because this tool so much feature to manage Internet Excha
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    rs client;
 </span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
-</span></span></code></pre></div><h6 id="todo-route-server-community-explain">TODO route server community explain</h6>
+</span></span></code></pre></div><h4 id="route-server-peer-configure">Route Server Peer Configure</h4>
+<p>Here is one example route server peer configure to member</p>
+<p>Example below only for IPV4 Peer, and for IPV6 still same</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4">########################################################################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">########################################################################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">###</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">### AS139190 - Google Cloud Indonesia - VLAN Interface #3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ipv4 table t_0003_as139190;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>filter f_import_as139190
+</span></span><span style="display:flex;"><span>prefix <span style="color:#8be9fd;font-style:italic">set</span> allnet;
+</span></span><span style="display:flex;"><span>ip <span style="color:#8be9fd;font-style:italic">set</span> allips;
+</span></span><span style="display:flex;"><span>int <span style="color:#8be9fd;font-style:italic">set</span> allas;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># Filter small prefixes</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span> net ~ <span style="color:#ff79c6">[</span> 0.0.0.0/0<span style="color:#ff79c6">{</span>25,32<span style="color:#ff79c6">}</span> <span style="color:#ff79c6">]</span> <span style="color:#ff79c6">)</span> <span style="color:#ff79c6">then</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        bgp_large_community.add<span style="color:#ff79c6">(</span> IXP_LC_FILTERED_PREFIX_LEN_TOO_LONG <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>        accept;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> !<span style="color:#ff79c6">(</span>avoid_martians<span style="color:#ff79c6">())</span> <span style="color:#ff79c6">then</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        bgp_large_community.add<span style="color:#ff79c6">(</span> IXP_LC_FILTERED_BOGON <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>        accept;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># Belt and braces: must have at least one ASN in the path</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span><span style="color:#ff79c6">(</span> bgp_path.len &lt; <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">)</span> <span style="color:#ff79c6">then</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        bgp_large_community.add<span style="color:#ff79c6">(</span> IXP_LC_FILTERED_AS_PATH_TOO_SHORT <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>        accept;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># Peer ASN == route&#39;s first ASN?</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>bgp_path.first !<span style="color:#ff79c6">=</span> <span style="color:#bd93f9">139190</span> <span style="color:#ff79c6">)</span> <span style="color:#ff79c6">then</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        bgp_large_community.add<span style="color:#ff79c6">(</span> IXP_LC_FILTERED_FIRST_AS_NOT_PEER_AS <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>        accept;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># set of all IPs this ASN uses to peer with on this VLAN</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">allips</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">[</span> 123.108.8.10 <span style="color:#ff79c6">]</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># Prevent BGP NEXT_HOP Hijacking</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> !<span style="color:#ff79c6">(</span> <span style="color:#8be9fd;font-style:italic">from</span> <span style="color:#ff79c6">=</span> bgp_next_hop <span style="color:#ff79c6">)</span> <span style="color:#ff79c6">then</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4"># need to differentiate between same ASN next hop or actual next hop hijacking</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span><span style="color:#ff79c6">(</span> bgp_next_hop ~ allips <span style="color:#ff79c6">)</span> <span style="color:#ff79c6">then</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>            bgp_large_community.add<span style="color:#ff79c6">(</span> IXP_LC_INFO_SAME_AS_NEXT_HOP <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">}</span> <span style="color:#ff79c6">else</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#6272a4"># looks like hijacking (intentional or not)</span>
+</span></span><span style="display:flex;"><span>            bgp_large_community.add<span style="color:#ff79c6">(</span> IXP_LC_FILTERED_NEXT_HOP_NOT_PEER_IP <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>            accept;
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># Filter Known Transit Networks</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> filter_has_transit_path<span style="color:#ff79c6">()</span> <span style="color:#ff79c6">then</span> accept;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># Belt and braces: no one needs an ASN path with &gt; 64 hops, that&#39;s just broken</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span><span style="color:#ff79c6">(</span> bgp_path.len &gt; <span style="color:#bd93f9">64</span> <span style="color:#ff79c6">)</span> <span style="color:#ff79c6">then</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        bgp_large_community.add<span style="color:#ff79c6">(</span> IXP_LC_FILTERED_AS_PATH_TOO_LONG <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>        accept;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">allas</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">[</span> <span style="color:#bd93f9">139190</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">]</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># Ensure origin ASN is in the neighbors AS-SET</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> !<span style="color:#ff79c6">(</span>bgp_path.last_nonaggregated ~ allas<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">then</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        bgp_large_community.add<span style="color:#ff79c6">(</span> IXP_LC_FILTERED_IRRDB_ORIGIN_AS_FILTERED <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>        accept;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># RPKI test - if it&#39;s INVALID or VALID, we are done</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> filter_rpki<span style="color:#ff79c6">()</span> <span style="color:#ff79c6">then</span> accept;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">allnet</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">[</span> 34.1.88.0/24,             34.101.0.0/16,            35.219.0.0/17
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">]</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> ! <span style="color:#ff79c6">(</span>net ~ allnet<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">then</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        bgp_large_community.add<span style="color:#ff79c6">(</span> IXP_LC_FILTERED_IRRDB_PREFIX_FILTERED <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>        bgp_large_community.add<span style="color:#ff79c6">(</span> IXP_LC_INFO_IRRDB_FILTERED_STRICT <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>        accept;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span> <span style="color:#ff79c6">else</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        bgp_large_community.add<span style="color:#ff79c6">(</span> IXP_LC_INFO_IRRDB_VALID <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    accept;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># The route server export filter exists as the export gateway on the BGP protocol.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Remember that standard IXP community filtering has already happened on the</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># master -&gt; bgp protocol pipe.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>filter f_export_as139190<span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># we should strip our own communities which we used for the looking glass and filtering</span>
+</span></span><span style="display:flex;"><span>    bgp_large_community.delete<span style="color:#ff79c6">(</span> <span style="color:#ff79c6">[(</span> routeserverasn, *, * <span style="color:#ff79c6">)]</span> <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>    bgp_community.delete<span style="color:#ff79c6">(</span> <span style="color:#ff79c6">[(</span> routeserverasn, * <span style="color:#ff79c6">)]</span> <span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># default position is to accept:</span>
+</span></span><span style="display:flex;"><span>    accept;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>protocol pipe pp_0003_as139190 <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        description <span style="color:#f1fa8c">&#34;Pipe for AS139190 - Google Cloud Indonesia - VLAN Interface 3&#34;</span>;
+</span></span><span style="display:flex;"><span>        table master4;
+</span></span><span style="display:flex;"><span>        peer table t_0003_as139190;
+</span></span><span style="display:flex;"><span>        import filter f_export_to_master;
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">export</span> where ixp_community_filter<span style="color:#ff79c6">(</span>139190<span style="color:#ff79c6">)</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>protocol bgp pb_0003_as139190 from tb_rsclient <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        description <span style="color:#f1fa8c">&#34;AS139190 - Google Cloud Indonesia&#34;</span>;
+</span></span><span style="display:flex;"><span>        neighbor 123.108.8.10 as 139190;
+</span></span><span style="display:flex;"><span>        ipv4 <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>            import limit <span style="color:#bd93f9">6000</span> action restart;
+</span></span><span style="display:flex;"><span>            import filter f_import_as139190;
+</span></span><span style="display:flex;"><span>            table t_0003_as139190;
+</span></span><span style="display:flex;"><span>            <span style="color:#8be9fd;font-style:italic">export</span> filter f_export_as139190;
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">}</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
+</span></span></code></pre></div><p>Example above that member i enable IRRDB Filtering so only AS Number define on <code>allas</code> and all net define on <code>allnet</code> only will accepted</p>
+<p>In this lab I using <a href="https://github.com/snar/bgpq3">bgpq3</a> for filtering IRRDB so, this lab using RPKI and IRRDB filtering prefix from member,</p>
+<p>a little stricter, but it&rsquo;s good Right :)</p>
 <h2 id="route-server-filterig-from-ui">Route Server Filterig From UI</h2>
-<h2 id="no-forward-traffic">No Forward Traffic</h2>
+<p>In the IXP Manager version 6.3.x member can&rsquo;t filtering or prepand prefix from UI, so member manual tag below community
+to filtering or prepend prefix to other member</p>
+<p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Filtering-Base-Community.png" alt="Filtering Base Community"></p>
+<p>but in version 6.4.x member can filtering or prepand prefix from UI</p>
+<p>Below example member(AS23679) filtering prefix from UI</p>
+<p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Filtering-From-UI.png" alt="Filtering From UI"></p>
+<p>Rule above is for prepend 3 time to member name <code>META</code> and all prefix form member <code>META</code> to member using that rule will be prepend 3 time</p>
+<p>Below is member name META got prefix from AS23679 that have been prepend 3 time</p>
+<p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Filtering-From-UI-2.png" alt="Filtering From UI"></p>
+<p>Below is Member with <code>AS23679</code> got prefix from <code>META</code> that have been prepend 3 time</p>
+<p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Filtering-From-UI-3.png" alt="Filtering From UI"></p>
+<h2 id="not-forward-traffic">NOT Forward Traffic</h2>
+<p>Route Server also not forward traffic but only export and import prefix from member to other member and I alredy explain in <a href="#flow-route-server-import-and-export-prefix">Flow Route Server Import And Export Prefix</a></p>
+<p>Lets prove it</p>
+<p>Here I prove it as a member <code>AS23679</code></p>
+<p>Below in router Bromo, I only have PEER to Route Server</p>
+<p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Prove-route-server.png" alt="Prove"></p>
+<p>In router bromo I get prefix member name <code>Cloudflare</code> via route server</p>
+<p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Prove-route-server-1.png" alt="Prove-1"></p>
+<p>Below is routing table on Router Bromo</p>
+<p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Prove-route-server-4.png" alt="Prove-4"></p>
+<p>Let see detail prefix we got from route server, below detail prefix 1.1.1.0/24 we got</p>
+<p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Prove-route-server-3.png" alt="Prove-3"></p>
+<p>In the router distribusi below I try traceroute to 1.1.1.1</p>
+<p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Prove-route-server-2.png" alt="Prove-2"></p>
+<p>Lets try on cloudflare router</p>
+<p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Prove-route-server-5.png" alt="Prove-5"></p>
+<p>See it&rsquo;s like direct PEER but it via route server :)</p>
+<p>For more detail configure route server or route collector you can see youtube <a href="https://www.youtube.com/@ixpmanager4386">IXP Manager</a></p>
+<p>Or you can see the documentation <a href="https://docs.ixpmanager.org/latest/">here</a></p>
+<p>Hope You enjoy read this blog :)</p>
     </div>
 </div>
 
