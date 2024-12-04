@@ -169,7 +169,7 @@ Here is flow how route server import prefix from member
 
 ![Route Server Import Prefix](https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Import-Prefix-From-member-to-master-table.png)
 
-Bird will create routing table name `t_000X_asXXXXX` each member, in this table all prefix (filtered and accept prefix will place) 
+Bird will create routing table name `t_000X_asXXXXX` each member, in this table all prefix (filtered and accept prefix) will place
 
 And only accepted prefix will through to master table
 
@@ -723,7 +723,7 @@ protocol bgp pb_0003_as139190 from tb_rsclient {
 
 Example above that member i enable IRRDB Filtering so only AS Number define on `allas` and all net define on `allnet` only will accepted
 
-In this lab I using [bgpq3](https://github.com/snar/bgpq3) for filtering IRRDB so, this lab using RPKI and IRRDB filtering prefix from member,
+In this lab I using [bgpq3](https://github.com/snar/bgpq3) for filtering IRRDB, so this lab using RPKI and IRRDB for filtering prefix from member,
 
 a little stricter, but it's good Right :)
 
@@ -737,11 +737,13 @@ to filtering or prepend prefix to other member
 
 but in version 6.4.x member can filtering or prepand prefix from UI
 
+In this Lab I using IXP Manager version 6.4.1
+
 Below example member(AS23679) filtering prefix from UI 
 
 ![Filtering From UI](https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Filtering-From-UI.png)
 
-Rule above is for prepend 3 time to member name `META` and all prefix form member `META` to member using that rule will be prepend 3 time
+Rule above is for prepend 3 time to member name `META` and all prefix from member `META` to member using that rule will be prepend 3 time
 
 Below is member name META got prefix from AS23679 that have been prepend 3 time
 

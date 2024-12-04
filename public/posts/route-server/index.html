@@ -218,7 +218,7 @@ but i use IXP Manager because this tool so much feature to manage Internet Excha
 <h5 id="flow-route-server-import-prefix">Flow route server import prefix</h5>
 <p>Here is flow how route server import prefix from member</p>
 <p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Import-Prefix-From-member-to-master-table.png" alt="Route Server Import Prefix"></p>
-<p>Bird will create routing table name <code>t_000X_asXXXXX</code> each member, in this table all prefix (filtered and accept prefix will place)</p>
+<p>Bird will create routing table name <code>t_000X_asXXXXX</code> each member, in this table all prefix (filtered and accept prefix) will place</p>
 <p>And only accepted prefix will through to master table</p>
 <p>Filtered prefix will get large community tag.</p>
 <p>Here example prefix filtered get community tag</p>
@@ -688,16 +688,17 @@ but i use IXP Manager because this tool so much feature to manage Internet Excha
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
 </span></span></code></pre></div><p>Example above that member i enable IRRDB Filtering so only AS Number define on <code>allas</code> and all net define on <code>allnet</code> only will accepted</p>
-<p>In this lab I using <a href="https://github.com/snar/bgpq3">bgpq3</a> for filtering IRRDB so, this lab using RPKI and IRRDB filtering prefix from member,</p>
+<p>In this lab I using <a href="https://github.com/snar/bgpq3">bgpq3</a> for filtering IRRDB, so this lab using RPKI and IRRDB for filtering prefix from member,</p>
 <p>a little stricter, but it&rsquo;s good Right :)</p>
 <h2 id="route-server-filterig-from-ui">Route Server Filterig From UI</h2>
 <p>In the IXP Manager version 6.3.x member can&rsquo;t filtering or prepand prefix from UI, so member manual tag below community
 to filtering or prepend prefix to other member</p>
 <p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Filtering-Base-Community.png" alt="Filtering Base Community"></p>
 <p>but in version 6.4.x member can filtering or prepand prefix from UI</p>
+<p>In this Lab I using IXP Manager version 6.4.1</p>
 <p>Below example member(AS23679) filtering prefix from UI</p>
 <p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Filtering-From-UI.png" alt="Filtering From UI"></p>
-<p>Rule above is for prepend 3 time to member name <code>META</code> and all prefix form member <code>META</code> to member using that rule will be prepend 3 time</p>
+<p>Rule above is for prepend 3 time to member name <code>META</code> and all prefix from member <code>META</code> to member using that rule will be prepend 3 time</p>
 <p>Below is member name META got prefix from AS23679 that have been prepend 3 time</p>
 <p><img src="https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Filtering-From-UI-2.png" alt="Filtering From UI"></p>
 <p>Below is Member with <code>AS23679</code> got prefix from <code>META</code> that have been prepend 3 time</p>
