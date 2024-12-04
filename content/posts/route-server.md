@@ -18,7 +18,7 @@ This Posts for documented my lab about route server using [IXP Manager](https://
 In production you can see [here](https://squad.iix.net.id/login)
 
 So much tool like IXP Manager, to manage Internet Exchange Point, the other things is [Alice Looking Glass](https://github.com/alice-lg/alice-lg), 
-but i use IXP Manager because this tool so much feature to manage Internet Exchange Point by UI. 
+but i use IXP Manager because this tool so many feature to manage Internet Exchange Point by UI. 
 
 First we must undestand [BGP bird](https://bird.network.cz/), because in ixp manager using bgp bird version 2 and the other reason is because bird is can be customized. 
 
