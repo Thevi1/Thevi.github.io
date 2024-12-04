@@ -1,11 +1,11 @@
 +++
 author = "Steve"
-title = "Mikrotik Tips"
+title = "Mikrotik"
 date = "2024-11-28"
-description = "Lab to undestand how route server work"
+description = "Configure Mikrotik"
 tags = [
     "Networking"
 ]   
 +++
 
-#### Comming soon
+##### Comming soon

@@ -11,9 +11,9 @@ tags = [
 
 How route server work?, lets see how this things work <!--more-->
 
-***Don't forget your coffee before reading this :)***
+***Don't forget your coffee before reading this posts :)***
 
-This Blog is for documented my lab about route server using [IXP Manager](https://www.ixpmanager.org/)
+This Posts for documented my lab about route server using [IXP Manager](https://www.ixpmanager.org/)
 
 In production you can see [here](https://squad.iix.net.id/login)
 
@@ -39,7 +39,7 @@ Here is my lab topologi,
 5. [Route Server Configuration](#route-server-configure)
     - [Route Server Filtering](#route-server-filtering)
     - [Route Server client configuration](#route-server-client-configuration)
-6. [Route Server Filterig From UI](#route-server-filterig-from-ui)
+6. [Route Server Filtering From UI](#route-server-filtering-from-ui)
 7. [Forward Traffc](#forward-traffic)
 
 ---
@@ -98,7 +98,7 @@ Route Server need reconfigure script to get update from IXP manager [here](https
 
 To reconfigure both IPV4 and IPV6 you can use [this](https://raw.githubusercontent.com/inex/IXP-Manager/refs/heads/master/tools/runtime/route-servers/api-reconfigure-all.sh) config file
 
-In the config file you need api key and handle to get update config from IXP Manager
+In config file you need api key and handle to get update config from IXP Manager
 
 Here is reconfigure both ipv4 and ipv6 in my route server
 
@@ -169,7 +169,7 @@ Here is flow how route server import prefix from member
 
 ![Route Server Import Prefix](https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Import-Prefix-From-member-to-master-table.png)
 
-Bird will create routing table name `t_000X_asXXXXX` each member, in this table all prefix (filtered and accept prefix) will place
+Bird will create routing table name `t_000X_asXXXXX` each member, in this table all prefix (filtered and accept prefix) will be placed
 
 And only accepted prefix will through to master table
 
@@ -218,6 +218,8 @@ Paths: (2 available, best #2, table default)
 vyos#
 
 ```
+
+So route server not forward traffic, traffic will through via switch from one member to other member
 
 ## Route Server Configure
 
@@ -571,7 +573,7 @@ template bgp tb_rsclient {
 
 Here is one example route server peer configure to member
 
-Example below only for IPV4 Peer, and for IPV6 still same
+Example below only for IPV4 Peer
 
 ```bash
 ########################################################################################
@@ -720,6 +722,155 @@ protocol bgp pb_0003_as139190 from tb_rsclient {
 
 ```
 
+Below for IPV6 peer
+
+```bash
+########################################################################################
+########################################################################################
+###
+### AS139190 - Google Cloud Indonesia - VLAN Interface #3
+
+ipv6 table t_0003_as139190;
+
+
+
+filter f_import_as139190
+prefix set allnet;
+ip set allips;
+int set allas;
+{
+
+
+    # Filter small prefixes
+    if ( net ~ [ ::/0{49,128} ] ) then {
+        bgp_large_community.add( IXP_LC_FILTERED_PREFIX_LEN_TOO_LONG );
+        accept;
+    }
+
+
+    if !(avoid_martians()) then {
+        bgp_large_community.add( IXP_LC_FILTERED_BOGON );
+        accept;
+    }
+
+    # Belt and braces: must have at least one ASN in the path
+    if( bgp_path.len < 1 ) then {
+        bgp_large_community.add( IXP_LC_FILTERED_AS_PATH_TOO_SHORT );
+        accept;
+    }
+
+    # Peer ASN == route's first ASN?
+    if (bgp_path.first != 139190 ) then {
+        bgp_large_community.add( IXP_LC_FILTERED_FIRST_AS_NOT_PEER_AS );
+        accept;
+    }
+
+    # set of all IPs this ASN uses to peer with on this VLAN
+    allips = [ 2001:7fa:2:5::10 ];
+
+    # Prevent BGP NEXT_HOP Hijacking
+    if !( from = bgp_next_hop ) then {
+
+        # need to differentiate between same ASN next hop or actual next hop hijacking
+        if( bgp_next_hop ~ allips ) then {
+            bgp_large_community.add( IXP_LC_INFO_SAME_AS_NEXT_HOP );
+        } else {
+            # looks like hijacking (intentional or not)
+            bgp_large_community.add( IXP_LC_FILTERED_NEXT_HOP_NOT_PEER_IP );
+            accept;
+        }
+    }
+
+
+    # Filter Known Transit Networks
+    if filter_has_transit_path() then accept;
+
+    # Belt and braces: no one needs an ASN path with > 64 hops, that's just broken
+    if( bgp_path.len > 64 ) then {
+        bgp_large_community.add( IXP_LC_FILTERED_AS_PATH_TOO_LONG );
+        accept;
+    }
+
+
+        
+    allas = [ 139190
+    ];
+
+
+    # Ensure origin ASN is in the neighbors AS-SET
+    if !(bgp_path.last_nonaggregated ~ allas) then {
+        bgp_large_community.add( IXP_LC_FILTERED_IRRDB_ORIGIN_AS_FILTERED );
+        accept;
+    }
+
+
+
+    # RPKI test - if it's INVALID or VALID, we are done
+    if filter_rpki() then accept;
+
+
+
+
+    allnet = [ 2404:f340:4000::/34
+    ];
+
+    
+    if ! (net ~ allnet) then {
+        bgp_large_community.add( IXP_LC_FILTERED_IRRDB_PREFIX_FILTERED );
+        bgp_large_community.add( IXP_LC_INFO_IRRDB_FILTERED_STRICT );
+        accept;
+    } else {
+        bgp_large_community.add( IXP_LC_INFO_IRRDB_VALID );
+    }
+
+
+
+    accept;
+}
+
+
+# The route server export filter exists as the export gateway on the BGP protocol.
+#
+# Remember that standard IXP community filtering has already happened on the
+# master -> bgp protocol pipe.
+
+filter f_export_as139190{
+
+    # we should strip our own communities which we used for the looking glass and filtering
+    bgp_large_community.delete( [( routeserverasn, *, * )] );
+    bgp_community.delete( [( routeserverasn, * )] );
+
+
+
+    # default position is to accept:
+    accept;
+
+}
+
+
+    
+protocol pipe pp_0003_as139190 {
+        description "Pipe for AS139190 - Google Cloud Indonesia - VLAN Interface 3";
+        table master6;
+        peer table t_0003_as139190;
+        import filter f_export_to_master;
+        export where ixp_community_filter(139190);
+}
+
+protocol bgp pb_0003_as139190 from tb_rsclient {
+        description "AS139190 - Google Cloud Indonesia";
+        neighbor 2001:7fa:2:5::10 as 139190;
+        ipv6 {
+            import limit 6000 action restart;
+            import filter f_import_as139190;
+            table t_0003_as139190;
+            export filter f_export_as139190;
+        };
+        
+}
+
+```
+
 
 Example above that member i enable IRRDB Filtering so only AS Number define on `allas` and all net define on `allnet` only will accepted
 
@@ -728,7 +879,7 @@ In this lab I using [bgpq3](https://github.com/snar/bgpq3) for filtering IRRDB, 
 a little stricter, but it's good Right :)
 
 
-## Route Server Filterig From UI 
+## Route Server Filtering From UI 
 
 In the IXP Manager version 6.3.x member can't filtering or prepand prefix from UI, so member manual tag below community
 to filtering or prepend prefix to other member
@@ -743,7 +894,7 @@ Below example member(AS23679) filtering prefix from UI
 
 ![Filtering From UI](https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Filtering-From-UI.png)
 
-Rule above is for prepend 3 time to member name `META` and all prefix from member `META` to member using that rule will be prepend 3 time
+Rule above is for prepend 3 time to member name `META` and all prefix from member name `META` to member using that rule will be prepend 3 time
 
 Below is member name META got prefix from AS23679 that have been prepend 3 time
 
@@ -786,11 +937,11 @@ Lets try on cloudflare router
 
 ![Prove-5](https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Prove-route-server-5.png)
 
-See it's like direct PEER but it via route server :)
+See it's like direct PEER but it's via route server :)
 
 
 For more detail configure route server or route collector you can see youtube [IXP Manager](https://www.youtube.com/@ixpmanager4386)
 
 Or you can see the documentation [here](https://docs.ixpmanager.org/latest/)
 
-Hope You enjoy read this blog :)
+Hope You enjoy read this Posts :)
