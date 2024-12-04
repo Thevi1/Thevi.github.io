@@ -181,7 +181,7 @@ Here example prefix filtered get community tag
 
 Here is prefix get RPKI and IRRDB community tag
 
-![Example prefix filtered](https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/Prefix-Filtered-example.png)
+![Example prefix filtered](https://raw.githubusercontent.com/Thevi1/Thevi.github.io/main/images/Route-server/RPKI-and-IRRDB-tag.png)
 
 
 ##### Flow route server export prefix
