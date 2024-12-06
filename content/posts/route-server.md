@@ -907,7 +907,7 @@ Below is Member with `AS23679` got prefix from `META` that have been prepend 3 t
 
 ## NOT Forward Traffic
 
-Route Server also not forward traffic but only export and import prefix from member to other member and I alredy explain in [Flow Route Server Import And Export Prefix](#flow-route-server-import-and-export-prefix)
+Route Server also not forward traffic but only export and import prefix from member to other member and I already explain in [Flow Route Server Import And Export Prefix](#flow-route-server-import-and-export-prefix)
 
 Lets prove it
 
