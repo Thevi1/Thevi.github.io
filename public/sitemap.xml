@@ -8,13 +8,13 @@
     <loc>//localhost:1313/about/</loc>
     <lastmod>2024-11-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/posts/frrouting-daemon/</loc>
+    <loc>//localhost:1313/to-do-list-post/frrouting-daemon/</loc>
     <lastmod>2024-11-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>//localhost:1313/tags/index/</loc>
     <lastmod>2024-11-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/posts/mikrotik/</loc>
+    <loc>//localhost:1313/to-do-list-post/mikrotik/</loc>
     <lastmod>2024-11-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>//localhost:1313/tags/networking/</loc>
@@ -27,6 +27,9 @@
     <lastmod>2024-11-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>//localhost:1313/tags/</loc>
+    <lastmod>2024-11-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/to-do-list-post/</loc>
     <lastmod>2024-11-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>//localhost:1313/categories/</loc>

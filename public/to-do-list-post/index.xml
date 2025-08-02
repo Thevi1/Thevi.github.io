@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Networking on </title>
-    <link>//localhost:1313/tags/networking/</link>
-    <description>Recent content in Networking on </description>
+    <title>TO-DO-LIST-POSTs on </title>
+    <link>//localhost:1313/to-do-list-post/</link>
+    <description>Recent content in TO-DO-LIST-POSTs on </description>
     <generator>Hugo</generator>
     <language>en</language>
     <managingEditor>matatatenggo@gmail.com (Steven  Geovino)</managingEditor>
     <webMaster>matatatenggo@gmail.com (Steven  Geovino)</webMaster>
     <lastBuildDate>Thu, 28 Nov 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/networking/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/to-do-list-post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>FRRouting Daemon</title>
       <link>//localhost:1313/to-do-list-post/frrouting-daemon/</link>
@@ -23,13 +23,6 @@
       <pubDate>Thu, 28 Nov 2024 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
       <guid>//localhost:1313/to-do-list-post/mikrotik/</guid>
       <description>&lt;h5 id=&#34;comming-soon&#34;&gt;Comming soon&lt;/h5&gt;</description>
-    </item>
-    <item>
-      <title>Route Server</title>
-      <link>//localhost:1313/posts/route-server/</link>
-      <pubDate>Thu, 28 Nov 2024 00:00:00 +0000</pubDate><author>matatatenggo@gmail.com (Steven  Geovino)</author>
-      <guid>//localhost:1313/posts/route-server/</guid>
-      <description>&lt;p&gt;How route server work?, lets see how this things work&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
